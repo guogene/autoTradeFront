@@ -36,6 +36,7 @@ const user = {
           commit('SET_NAME', data.name)
           commit('SET_AVATAR', data.avatar)
           commit('SET_TOKEN', data.token)
+          console.log(data)
           resolve()
         }).catch(error => {
           reject(error)

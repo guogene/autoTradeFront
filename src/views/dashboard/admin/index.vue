@@ -1,15 +1,10 @@
 <template>
   <div class="dashboard-editor-container">
-    <panel-group :home-data="{
-        'btcusdt': {'price': 4545, 'rate': 33.04},
-        'eosusdt': {'price': 23, 'rate': -23.99},
-        'ethusdt': {'price': 4, 'rate': -0.7},
-        'htusdt': {'price': 5, 'rate': 0},
-    }"/>
+    <panel-group :home-data="homeData"/>
     <el-row style="background:#fff;padding:16px 16px 0;margin-bottom:32px;">
       <VueTradingView
         ref="trading"
-        :options="trading"
+        :options="tradingViewOption"
         style="height: 610px"/>
     </el-row>
   </div>
@@ -18,8 +13,9 @@
 <script>
 import PanelGroup from './components/PanelGroup'
 import VueTradingView from 'vue-trading-view'
+import { getHomeData } from '@/api/trade'
 
-const trading = {
+const tradingViewOption = {
   autosize: true,
   symbol: 'HUOBI:BTCUSDT',
   interval: 'D',
@@ -43,7 +39,28 @@ export default {
   },
   data() {
     return {
-      trading: trading
+      tradingViewOption: tradingViewOption,
+      homeData: {
+        'btcusdt': {'price': 0, 'rate': 0},
+        'eosusdt': {'price': 0, 'rate': 0},
+        'ethusdt': {'price': 0, 'rate': 0},
+        'htusdt': {'price': 0, 'rate': 0},
+    }
+    }
+  },
+  mounted(){
+    this.setHomeData()
+    this.heatInterval = setInterval(this.setHomeData, 1000)
+  },
+  beforeDestroy(){
+    clearInterval(this.heatInterval)
+  },
+  methods: {
+    setHomeData() {
+      getHomeData().then(reponse => {
+        const data = reponse.data
+        this.homeData = data
+      })
     }
   }
 }

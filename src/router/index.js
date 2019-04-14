@@ -50,36 +50,36 @@ export const constantRouterMap = [
     ]
   },
   {
-    path: '/example',
+    path: '/backtest',
     component: Layout,
-    redirect: '/example/table',
-    name: 'Example',
-    meta: { title: 'Example', icon: 'example' },
+    redirect: '/backtest/strategy',
+    name: '回测系统',
+    meta: { title: '回测系统', icon: 'example' },
     children: [
       {
-        path: 'table',
-        name: 'Table',
+        path: 'strategy',
+        name: '策略管理',
         component: () => import('@/views/table/index'),
-        meta: { title: 'Table', icon: 'table' }
+        meta: { title: '策略管理', icon: 'table' }
       },
       {
-        path: 'tree',
-        name: 'Tree',
+        path: 'history',
+        name: '历史回测',
         component: () => import('@/views/tree/index'),
-        meta: { title: 'Tree', icon: 'tree' }
+        meta: { title: '历史回测', icon: 'tree' }
       }
     ]
   },
 
   {
-    path: '/form',
+    path: '/trade',
     component: Layout,
     children: [
       {
         path: 'index',
-        name: 'Form',
+        name: '交易管理',
         component: () => import('@/views/form/index'),
-        meta: { title: 'Form', icon: 'form' }
+        meta: { title: '交易管理', icon: 'form' }
       }
     ]
   },
@@ -142,12 +142,12 @@ export const constantRouterMap = [
   },
 
   {
-    path: 'external-link',
+    path: '数据管理',
     component: Layout,
     children: [
       {
         path: 'https://panjiachen.github.io/vue-element-admin-site/#/',
-        meta: { title: 'External Link', icon: 'link' }
+        meta: { title: '数据管理', icon: 'link' }
       }
     ]
   },

@@ -2,17 +2,14 @@
   <div class="dashboard-editor-container">
     <panel-group :home-data="homeData"/>
     <el-row style="background:#fff;padding:16px 16px 0;margin-bottom:32px;">
-      <VueTradingView
-        ref="trading"
-        :options="tradingViewOption"
-        style="height: 610px"/>
+      <VueTradingView ref="trading" :options="tradingViewOption" style="height: 610px"/>
     </el-row>
   </div>
 </template>
 
 <script>
 import PanelGroup from './components/PanelGroup'
-import VueTradingView from 'vue-trading-view'
+import VueTradingView from 'vue-trading-view2'
 import { getHomeData } from '@/api/trade'
 
 const tradingViewOption = {
@@ -41,18 +38,18 @@ export default {
     return {
       tradingViewOption: tradingViewOption,
       homeData: {
-        'btcusdt': {'price': 0, 'rate': 0},
-        'eosusdt': {'price': 0, 'rate': 0},
-        'ethusdt': {'price': 0, 'rate': 0},
-        'htusdt': {'price': 0, 'rate': 0},
-    }
+        btcusdt: { price: 0, rate: 0 },
+        eosusdt: { price: 0, rate: 0 },
+        ethusdt: { price: 0, rate: 0 },
+        htusdt: { price: 0, rate: 0 }
+      }
     }
   },
-  mounted(){
+  mounted() {
     this.setHomeData()
     this.heatInterval = setInterval(this.setHomeData, 1000)
   },
-  beforeDestroy(){
+  beforeDestroy() {
     clearInterval(this.heatInterval)
   },
   methods: {

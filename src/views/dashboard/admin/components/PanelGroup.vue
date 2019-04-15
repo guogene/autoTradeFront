@@ -1,56 +1,63 @@
 <template>
   <el-row :gutter="40" class="panel-group">
     <el-col :xs="12" :sm="12" :lg="6" class="card-panel-col">
-      <div class="card-panel" >
+      <div class="card-panel">
         <div class="card-panel-icon-wrapper icon-people">
-          <svg-icon icon-class="bitcoin" class-name="card-panel-icon" />
+          <svg-icon icon-class="bitcoin" class-name="card-panel-icon"/>
         </div>
         <div class="card-panel-description">
-          <div class="card-panel-text">
-            BTC
-          </div>
-          <span style="font-size: 24px; color: #666; margin-top: 10px">{{homeData.btcusdt.price}}</span>
-          <span :class="homeData.btcusdt.rate >= 0 ? 'rate-green' : 'rate-red'" style="">{{homeData.btcusdt.rate}}%</span>
+          <div class="card-panel-text">BTC</div>
+          <span class="price">{{ homeData.btcusdt.price }}</span>
+          <span
+            :class="homeData.btcusdt.rate >= 0 ? 'rate-green' : 'rate-red'"
+            style
+          >{{ homeData.btcusdt.rate }}%</span>
         </div>
       </div>
     </el-col>
     <el-col :xs="12" :sm="12" :lg="6" class="card-panel-col">
-      <div class="card-panel" >
+      <div class="card-panel">
         <div class="card-panel-icon-wrapper icon-message">
-          <svg-icon icon-class="eos" class-name="card-panel-icon" />
+          <svg-icon icon-class="eos" class-name="card-panel-icon"/>
         </div>
         <div class="card-panel-description">
-          <div class="card-panel-text">
-            EOS
-          </div>
-          <span style="font-size: 24px; color: #666; margin-top: 10px">{{homeData.eosusdt.price}}</span>
-          <span :class="homeData.eosusdt.rate >= 0 ? 'rate-green' : 'rate-red'" style="">{{homeData.eosusdt.rate}}%</span>        </div>
+          <div class="card-panel-text">EOS</div>
+          <span class="price">{{ homeData.eosusdt.price }}</span>
+          <span
+            :class="homeData.eosusdt.rate >= 0 ? 'rate-green' : 'rate-red'"
+            style
+          >{{ homeData.eosusdt.rate }}%</span>
+        </div>
       </div>
     </el-col>
     <el-col :xs="12" :sm="12" :lg="6" class="card-panel-col">
-      <div class="card-panel" >
+      <div class="card-panel">
         <div class="card-panel-icon-wrapper icon-money">
-          <svg-icon icon-class="eth" class-name="card-panel-icon" />
+          <svg-icon icon-class="eth" class-name="card-panel-icon"/>
         </div>
         <div class="card-panel-description">
-          <div class="card-panel-text">
-            ETH
-          </div>
-          <span style="font-size: 24px; color: #666; margin-top: 10px">{{homeData.ethusdt.price}}</span>
-          <span :class="homeData.ethusdt.rate >= 0 ? 'rate-green' : 'rate-red'" style="">{{homeData.ethusdt.rate}}%</span>        </div>
+          <div class="card-panel-text">ETH</div>
+          <span class="price">{{ homeData.ethusdt.price }}</span>
+          <span
+            :class="homeData.ethusdt.rate >= 0 ? 'rate-green' : 'rate-red'"
+            style
+          >{{ homeData.ethusdt.rate }}%</span>
+        </div>
       </div>
     </el-col>
     <el-col :xs="12" :sm="12" :lg="6" class="card-panel-col">
-      <div class="card-panel" >
+      <div class="card-panel">
         <div class="card-panel-icon-wrapper icon-shopping">
-          <svg-icon icon-class="ht" class-name="card-panel-icon" />
+          <svg-icon icon-class="ht" class-name="card-panel-icon"/>
         </div>
         <div class="card-panel-description">
-          <div class="card-panel-text">
-            HT
-          </div>
-          <span style="font-size: 24px; color: #666; margin-top: 10px">{{homeData.htusdt.price}}</span>
-          <span :class="homeData.htusdt.rate >= 0 ? 'rate-green' : 'rate-red'" style="">{{homeData.htusdt.rate}}%</span>        </div>
+          <div class="card-panel-text">HT</div>
+          <span class="price">{{ homeData.htusdt.price }}</span>
+          <span
+            :class="homeData.htusdt.rate >= 0 ? 'rate-green' : 'rate-red'"
+            style
+          >{{ homeData.htusdt.rate }}%</span>
+        </div>
       </div>
     </el-col>
   </el-row>
@@ -60,27 +67,29 @@
 import CountTo from 'vue-count-to'
 
 export default {
-    components: {
+  components: {
     CountTo
   },
-   props: {
+  props: {
     homeData: {
       type: Object,
-      default: {
-        'btcusdt': {'price': 0, 'rate': 0},
-        'eosusdt': {'price': 0, 'rate': 0},
-        'ethusdt': {'price': 0, 'rate': 0},
-        'htusdt': {'price': 0, 'rate': 0}
+      default: () => {
+        return {
+          btcusdt: { price: 0, rate: 0 },
+          eosusdt: { price: 0, rate: 0 },
+          ethusdt: { price: 0, rate: 0 },
+          htusdt: { price: 0, rate: 0 }
+        }
+      }
     }
   }
-}
 }
 </script>
 
 <style lang="scss" scoped>
 .panel-group {
   margin-top: 18px;
-  .card-panel-col{
+  .card-panel-col {
     margin-bottom: 32px;
   }
   .card-panel {
@@ -91,14 +100,14 @@ export default {
     overflow: hidden;
     color: #666;
     background: #fff;
-    box-shadow: 4px 4px 40px rgba(0, 0, 0, .05);
-    border-color: rgba(0, 0, 0, .05);
+    box-shadow: 4px 4px 40px rgba(0, 0, 0, 0.05);
+    border-color: rgba(0, 0, 0, 0.05);
     &:hover {
       .card-panel-icon-wrapper {
         color: #fff;
       }
       .icon-people {
-         background: #40c9c6;
+        background: #40c9c6;
       }
       .icon-message {
         background: #36a3f7;
@@ -107,7 +116,7 @@ export default {
         background: #f4516c;
       }
       .icon-shopping {
-        background: #34bfa3
+        background: #34bfa3;
       }
     }
     .icon-people {
@@ -120,14 +129,19 @@ export default {
       color: #f4516c;
     }
     .icon-shopping {
-      color: #34bfa3
+      color: #34bfa3;
     }
-    .rate-green{
+    .price {
+      font-size: 22px;
+      color: #666;
+      margin-top: 10px;
+    }
+    .rate-green {
       font-size: 18px;
       margin-left: 25px;
       color: green;
     }
-    .rate-red{
+    .rate-red {
       font-size: 18px;
       margin-left: 25px;
       color: red;

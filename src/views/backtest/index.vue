@@ -71,7 +71,7 @@
       </el-table-column>
       <el-table-column label="操作" align="center" width="230" class-name="small-padding fixed-width">
         <template slot-scope="{row}">
-          <el-button v-waves size="mini" @click="handleUpdate(row)">进行回测</el-button>
+          <el-button v-waves size="mini" @click="buildTest(row)">进行回测</el-button>
         </template>
       </el-table-column>
     </el-table>
@@ -85,7 +85,7 @@
 </template>
 
 <script>
-// import { getList } from '@/api/table'
+import { getList } from '@/api/table'
 import waves from '@/directive/waves' // waves directive
 import { parseTime } from '@/utils'
 
@@ -126,24 +126,10 @@ export default {
   methods: {
     fetchData() {
       this.listLoading = true
-      setTimeout(() => {
+      getList(this.listQuery).then(response => {
+        this.list = response.data
         this.listLoading = false
-      }, 1000)
-      this.list = [
-        {
-          id: 1,
-          timestamp: 1555628100,
-          title: '布林趋势策略',
-          author: 'guogene',
-          importance: 3,
-          status: 'published',
-          description: '这是一个垃圾策略'
-        }
-      ]
-      // getList(this.listQuery).then(response => {
-      //   this.list = response.data.items
-      //   this.listLoading = false
-      // })
+      })
     },
     handleFilter() {
       this.listQuery.page = 1
@@ -152,6 +138,9 @@ export default {
     handleFetchPv(des) {
       this.description = des
       this.dialogPvVisible = true
+    },
+    buildTest(row) {
+      this.$router.push({ path: '/backtest/build', query: { strategy: row.title } })
     }
   }
 }

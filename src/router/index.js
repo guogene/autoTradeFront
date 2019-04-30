@@ -59,7 +59,7 @@ export const constantRouterMap = [
       {
         path: 'strategy',
         name: '策略管理',
-        component: () => import('@/views/table/index'),
+        component: () => import('@/views/backtest/index'),
         meta: { title: '策略管理', icon: 'table' }
       },
       {
@@ -67,6 +67,13 @@ export const constantRouterMap = [
         name: '历史回测',
         component: () => import('@/views/tree/index'),
         meta: { title: '历史回测', icon: 'tree' }
+      },
+      {
+        path: 'build',
+        name: '回测构建',
+        hidden: true,
+        component: () => import('@/views/backtest/buildbacktest/index'),
+        meta: { title: '回测构建', icon: 'tree' }
       }
     ]
   },

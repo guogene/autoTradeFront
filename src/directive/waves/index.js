@@ -10,4 +10,5 @@ if (window.Vue) {
 }
 
 waves.install = install
+
 export default waves

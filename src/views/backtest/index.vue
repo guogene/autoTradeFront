@@ -140,7 +140,7 @@ export default {
       this.dialogPvVisible = true
     },
     buildTest(row) {
-      this.$router.push({ path: '/backtest/build', query: { strategy: row.title } })
+      this.$router.push({ path: '/backtest/build', query: { strategy: row.title }})
     }
   }
 }

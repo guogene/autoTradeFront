@@ -20,7 +20,7 @@
           align="right" />
       </el-form-item>
       <el-form-item label="策略选择">
-        <el-switch v-model="strategyCon" :active-text="strategy" disabled/>
+        <el-switch v-model="strategyCon" :active-text="form.strategy" disabled/>
       </el-form-item>
       <el-form-item label="K线类型-步长">
         <el-radio-group v-model="form.crossInterval">
@@ -48,8 +48,7 @@
       <el-form-item label="交易滑点" style="width: 250px; display: inline-block;">
         <el-input
           v-model="form.splitnum"
-          placeholder="请输入数字" >
-        </el-input>
+          placeholder="请输入数字" />
       </el-form-item>
       <el-form-item label="手续费" style="width: 250px; display: inline-block;">
         <el-input
@@ -70,6 +69,9 @@
 </template>
 
 <script>
+import { buildBacktest } from '@/api/backtest'
+
+
 export default {
   data() {
     return {
@@ -81,10 +83,10 @@ export default {
         balance: 1000,
         splitnum: 0.002,
         fee: 0.2,
-        desc: ''
+        desc: '',
+        strategy: this.$route.query.strategy
       },
       strategyCon: true,
-      strategy: this.$route.query.strategy,
       adviceSymbol: [],
       pickerOptions: {
         shortcuts: [{
@@ -113,6 +115,10 @@ export default {
   methods: {
     onSubmit() {
       this.$message('submit!')
+      console.log(this.form)
+      buildBacktest(this.form).then(response => {
+        console.log(response)
+      })
     },
     onCancel() {
       this.$message({
